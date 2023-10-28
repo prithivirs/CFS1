@@ -1,7 +1,7 @@
 logging.file: logs/dev_app.log
 logging.pattern.console: "%d %-5level %logger : %msg%n"
 logging.pattern.file: "%d %-5level [%thread] %logger : %msg%n"
-logging.level.: off
+logging.level.: INFO
 
 
 server:
