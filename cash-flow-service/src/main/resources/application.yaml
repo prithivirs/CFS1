@@ -1,0 +1,16 @@
+logging.file: logs/dev_app.log
+logging.pattern.console: "%d %-5level %logger : %msg%n"
+logging.pattern.file: "%d %-5level [%thread] %logger : %msg%n"
+logging.level.: INFO
+
+
+server:
+  port: 9011
+  session-timeout: 6000
+  connection-timeout: 120000
+  servlet:
+    context-path: /CashFlowService
+
+    
+    
+    
