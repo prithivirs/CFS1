@@ -1,0 +1,13 @@
+
+//build an image for docker
+
+sudo docker build -t cfs . 
+
+//tag a image to docker repo
+//sudo docker {localimage} repoName:version
+
+sudo docker tag cfs prithivirs/cfs:1.0
+
+//push
+
+sudo docker push prithivirs/cfs:1.0
