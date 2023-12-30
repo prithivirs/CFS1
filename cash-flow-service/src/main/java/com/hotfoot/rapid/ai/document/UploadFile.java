@@ -39,20 +39,14 @@ public class UploadFile extends HttpServlet{
 	private List<String> permittedContentTypes;
 	private ObjectMapper mapper = new ObjectMapper();
 	private Tika tika = new Tika();
-	private boolean localUpload;
 	public UploadFile(String rootPath) {
 		UPLOAD_DIRECTORY = rootPath;
 	}
 
-	public UploadFile(String rootPath, List<String> permittedContentTypes, boolean localUpload, String localPath) {
+	public UploadFile(String rootPath, List<String> permittedContentTypes,String localPath) {
 		this(rootPath);
-		this.localUpload = localUpload;
 		this.LOCAL_DIRECTORY = localPath;
 		setPermittedContentTypes(permittedContentTypes);
-//		this.auCommonUrl = auCommonUrl;
-//		this.imageCompress = imageCompress;
-//		this.webUserAgent = webUserAgent;
-
 	}
 
 	private void setPermittedContentTypes(List<String> permittedContentTypes) {
@@ -156,10 +150,6 @@ public class UploadFile extends HttpServlet{
 		String actualName = name.substring(0, name.lastIndexOf("."));
 		Path fileName = Paths.get(UPLOAD_DIRECTORY, productName, actualName + "_-_" + id + extension);
 		uploadFile(response, id, item, extension, actualName, fileName);
-		if (localUpload) {
-			Path fileNameLocal = Paths.get(LOCAL_DIRECTORY, productName, actualName + "_-_" + id + extension);
-			Files.copy(fileName, fileNameLocal, StandardCopyOption.REPLACE_EXISTING);
-		}
 	}
 
 	private void uploadFile(HttpServletResponse response, String id, FileItem item, String extension, String actualName, Path fileName) throws Exception, IOException {

@@ -2,6 +2,7 @@ logging.file: logs/dev_app.log
 logging.pattern.console: "%d %-5level %logger : %msg%n"
 logging.pattern.file: "%d %-5level [%thread] %logger : %msg%n"
 logging.level.: INFO
+logging.level.org.springframework.security: DEBUG
 
 
 server:
@@ -19,19 +20,18 @@ spring.datasource.testOnBorrow : true
 spring.jpa.database-platform : org.hibernate.dialect.MySQL57Dialect
 spring.datasource.validationQuery : SELECT 1
 spring.jpa.show-sql : true
-spring.jpa.hibernate.ddl-auto : none
-spring.jpa.generate-ddl : false	
+spring.jpa.hibernate.ddl-auto : update
+spring.jpa.generate-ddl : true
 spring.jpa.properties.hibernate.cache.use_second_level_cache : false
 spring.jpa.properties.hibernate.cache.use_query_cache : false
 spring.jpa.properties.hibernate.cache.use_structured_entries : false
 spring.jpa.properties.hibernate.cache.use_minimal_puts : false
 spring.jpa.properties.hibernate.cache.generate_statistics : false
 
-aws.upload: false
+services.status:
+  cart-enabled: true
+  perfios-enabled: true
+  
 document.upload_file_path: /home/vagrant/images
 document.local_upload_file_path: /home/vagrant/images
 document.permitted_content_types: application/pdf
-
-    
-    
-    

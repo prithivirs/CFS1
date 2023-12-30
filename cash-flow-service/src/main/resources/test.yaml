@@ -1,0 +1,4 @@
+aws.upload: false
+document.upload_file_path: /home/vagrant/images
+document.local_upload_file_path: /home/vagrant/images
+document.permitted_content_types: application/pdf
