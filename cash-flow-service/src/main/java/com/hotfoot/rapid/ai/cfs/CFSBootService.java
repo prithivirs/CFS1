@@ -9,17 +9,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotfoot.rapid.ai.document.UploadFile;
 import com.hotfoot.rapid.ai.document.service.ConfigService;
-import com.hotfoot.rapid.ai.token.filter.TokenValidityFilter;
 
 @SpringBootApplication(scanBasePackages = { "com.hotfoot" })
 @EntityScan(basePackages = { "com.hotfoot" })
@@ -27,6 +26,7 @@ import com.hotfoot.rapid.ai.token.filter.TokenValidityFilter;
 @RestController
 @EnableAsync
 @EnableConfigurationProperties(ConfigService.class)
+@EnableScheduling
 public class CFSBootService {
 
 	@GetMapping("/getScore")

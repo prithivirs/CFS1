@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token.filter;
+package com.hotfoot.rapid.ai.security.filter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hotfoot.rapid.ai.token.TokenCreationService;
-import com.hotfoot.rapid.ai.token.datamodel.TokenCache;
-import com.hotfoot.rapid.ai.token.repository.TokenCacheRepository;
+import com.hotfoot.rapid.ai.security.datamodel.TokenCache;
+import com.hotfoot.rapid.ai.security.repository.TokenCacheRepository;
+import com.hotfoot.rapid.ai.security.service.TokenCreationService;
 
 import java.io.IOException;
 import java.util.Date;

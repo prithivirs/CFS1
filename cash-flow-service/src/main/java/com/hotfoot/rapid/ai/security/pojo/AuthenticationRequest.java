@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token.pojo;
+package com.hotfoot.rapid.ai.security.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

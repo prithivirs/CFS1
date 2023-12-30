@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token;
+package com.hotfoot.rapid.ai.security.service;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hotfoot.rapid.ai.token.datamodel.TokenCache;
-import com.hotfoot.rapid.ai.token.datamodel.Vault;
-import com.hotfoot.rapid.ai.token.pojo.AuthenticationRequest;
-import com.hotfoot.rapid.ai.token.repository.TokenCacheRepository;
-import com.hotfoot.rapid.ai.token.repository.VaultRepository;
+import com.hotfoot.rapid.ai.security.datamodel.TokenCache;
+import com.hotfoot.rapid.ai.security.datamodel.Vault;
+import com.hotfoot.rapid.ai.security.pojo.AuthenticationRequest;
+import com.hotfoot.rapid.ai.security.repository.TokenCacheRepository;
+import com.hotfoot.rapid.ai.security.repository.VaultRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

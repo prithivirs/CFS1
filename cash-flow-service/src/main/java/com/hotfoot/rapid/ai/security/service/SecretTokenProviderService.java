@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token;
+package com.hotfoot.rapid.ai.security.service;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -7,8 +7,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hotfoot.rapid.ai.token.datamodel.Vault;
-import com.hotfoot.rapid.ai.token.repository.VaultRepository;
+import com.hotfoot.rapid.ai.security.datamodel.Vault;
+import com.hotfoot.rapid.ai.security.repository.VaultRepository;
 
 @Component
 public class SecretTokenProviderService {

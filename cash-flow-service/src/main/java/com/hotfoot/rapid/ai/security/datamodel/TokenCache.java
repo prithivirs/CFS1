@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token.datamodel;
+package com.hotfoot.rapid.ai.security.datamodel;
 
 import java.util.Date;
 
@@ -14,22 +14,25 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Vault {
+public class TokenCache {
 	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@JsonProperty("vendor_name")
-	private String vendorName;
+	@JsonProperty("loan_id")
+	private String loanId;
 	
-	@JsonProperty("secretKey")
-	private String secretKey;
-
-	@JsonProperty("is_active")
-	private boolean isActive;
+	@JsonProperty("token")
+	private String token;
 	
 	@JsonProperty("created_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date createdDate;
+	
+	@JsonProperty("modified_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date modifiedDate;
+
 }

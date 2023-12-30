@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token.pojo;
+package com.hotfoot.rapid.ai.security.pojo;
 
 import java.util.Date;
 

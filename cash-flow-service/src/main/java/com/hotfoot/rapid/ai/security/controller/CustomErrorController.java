@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token;
+package com.hotfoot.rapid.ai.security.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,8 +1,8 @@
-package com.hotfoot.rapid.ai.token.repository;
+package com.hotfoot.rapid.ai.security.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.hotfoot.rapid.ai.token.datamodel.Vault;
+import com.hotfoot.rapid.ai.security.datamodel.Vault;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

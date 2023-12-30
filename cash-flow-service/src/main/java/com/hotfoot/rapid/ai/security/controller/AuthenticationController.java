@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token;
+package com.hotfoot.rapid.ai.security.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotfoot.rapid.ai.token.pojo.AuthenticationRequest;
+import com.hotfoot.rapid.ai.security.pojo.AuthenticationRequest;
+import com.hotfoot.rapid.ai.security.service.SecretTokenProviderService;
+import com.hotfoot.rapid.ai.security.service.TokenCreationService;
 
 @RestController
 public class AuthenticationController {

@@ -1,4 +1,4 @@
-package com.hotfoot.rapid.ai.token;
+package com.hotfoot.rapid.ai.security.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.hotfoot.rapid.ai.token.datamodel.TokenCache;
-import com.hotfoot.rapid.ai.token.repository.TokenCacheRepository;
+import com.hotfoot.rapid.ai.security.datamodel.TokenCache;
+import com.hotfoot.rapid.ai.security.repository.TokenCacheRepository;
 
 @Component
 public class LogoutService {
