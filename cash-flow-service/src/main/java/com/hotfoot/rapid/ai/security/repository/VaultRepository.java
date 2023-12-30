@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface VaultRepository extends JpaRepository<Vault, Long>{
 	
-	public Vault findByVendorName(String vendor);
+	public Vault findByVendorNameAndIsActive(String vendor,boolean isActive);
 
 }

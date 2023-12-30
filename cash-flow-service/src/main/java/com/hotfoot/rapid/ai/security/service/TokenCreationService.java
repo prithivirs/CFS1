@@ -35,7 +35,7 @@ public class TokenCreationService {
 
 	public boolean createToken(AuthenticationRequest authenticationRequest, HttpServletResponse response) {
 		String loanId = authenticationRequest.getRequest().getLoanId();
-		Vault developer = vaultRepo.findByVendorName(authenticationRequest.getClient());
+		Vault developer = vaultRepo.findByVendorNameAndIsActive(authenticationRequest.getClient(),true);
 		if (developer == null || developer.getSecretKey() == null) {
 			return false;
 		}

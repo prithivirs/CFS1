@@ -21,7 +21,7 @@ public class SecretTokenProviderService {
         byte[] randomBytes = generateRandomBytes(32); // Adjust the size of the byte array as needed
 
         // Convert the byte array to a Base64-encoded string
-        Vault vault = tokenRepo.findByVendorName(client);
+        Vault vault = tokenRepo.findByVendorNameAndIsActive(client,true);
         String encodedValue = base64Encode(randomBytes);
 		if(vault == null) {
         	vault = new Vault();
