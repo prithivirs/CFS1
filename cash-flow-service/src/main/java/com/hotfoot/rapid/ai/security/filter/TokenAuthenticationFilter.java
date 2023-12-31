@@ -69,7 +69,7 @@ public class TokenAuthenticationFilter implements Filter {
 //				}
 //			}
 			String tokenFromRequest = tokenService.getToken((HttpServletRequest) request);
-			if (tokenFromRequest == null || !isExcludedPath) {
+			if (tokenFromRequest == null && !isExcludedPath) {
 				logoutService.logout((HttpServletRequest) request, (HttpServletResponse) response);
 			} else {
 				TokenCache activeToken = tokenCacheRepo.findByToken(tokenFromRequest);
