@@ -13,6 +13,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public CorsFilter corsFilter() {
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    
 	    CorsConfiguration config = new CorsConfiguration();
 	    config.addAllowedOrigin("*");
 	    config.addAllowedMethod("*");
