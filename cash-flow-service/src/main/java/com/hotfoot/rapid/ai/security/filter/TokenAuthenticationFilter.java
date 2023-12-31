@@ -50,7 +50,7 @@ public class TokenAuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
-			String referrer = ((HttpServletRequest) request).getHeader(HttpHeaders.REFERER);
+//			String referrer = ((HttpServletRequest) request).getHeader(HttpHeaders.REFERER);
 			String contextPath = ((HttpServletRequest) request).getContextPath();
 			String path = ((HttpServletRequest) request).getRequestURI().substring(contextPath.length());
 			boolean isExcludedPath = true;
@@ -61,15 +61,15 @@ public class TokenAuthenticationFilter implements Filter {
 				}
 			}
 			
-			boolean isValidReferrer = true;
-			for (String domainName : whiteListedDomains) {
-				if (!referrer.startsWith(domainName.trim())) {
-					isValidReferrer = false;
-					continue;
-				}
-			}
+//			boolean isValidReferrer = true;
+//			for (String domainName : whiteListedDomains) {
+//				if (!referrer.startsWith(domainName.trim())) {
+//					isValidReferrer = false;
+//					continue;
+//				}
+//			}
 			String tokenFromRequest = tokenService.getToken((HttpServletRequest) request);
-			if (tokenFromRequest == null || referrer == null || !isValidReferrer || !isExcludedPath) {
+			if (tokenFromRequest == null || !isExcludedPath) {
 				logoutService.logout((HttpServletRequest) request, (HttpServletResponse) response);
 			} else {
 				TokenCache activeToken = tokenCacheRepo.findByToken(tokenFromRequest);
