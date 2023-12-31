@@ -33,11 +33,12 @@ public class TokenCreationService {
 	@Autowired
 	private TokenCacheRepository tokenCacheRepository;
 
-	public boolean createToken(AuthenticationRequest authenticationRequest, HttpServletResponse response) {
+	public AuthenticationRequest createToken(AuthenticationRequest authenticationRequest, HttpServletResponse response) {
 		String loanId = authenticationRequest.getRequest().getLoanId();
 		Vault developer = vaultRepo.findByVendorNameAndIsActive(authenticationRequest.getClient(),true);
 		if (developer == null || developer.getSecretKey() == null) {
-			return false;
+			authenticationRequest.setAuthenticated(false);
+			return authenticationRequest;
 		}
 		byte[] decodedBytes = decodeFromBase64(authenticationRequest.getSecretKey());
 		String originalEncodedString = new String(decodedBytes, StandardCharsets.UTF_8);
@@ -60,9 +61,11 @@ public class TokenCreationService {
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			response.addHeader(TOKEN, authToken);
-			return true;
+			authenticationRequest.setAuthenticated(true);
+			return authenticationRequest;
 		}
-		return false;
+		authenticationRequest.setAuthenticated(false);
+		return authenticationRequest;
 	}
 
 	private byte[] decodeFromBase64(String base64String) {

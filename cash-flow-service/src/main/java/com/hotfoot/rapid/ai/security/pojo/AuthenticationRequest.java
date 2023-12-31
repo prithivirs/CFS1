@@ -16,4 +16,7 @@ public class AuthenticationRequest {
 	@JsonProperty("request")
 	private ClientRequest request;
 	
+	@JsonProperty("is_authenticated")
+	private boolean isAuthenticated;
+	
 }

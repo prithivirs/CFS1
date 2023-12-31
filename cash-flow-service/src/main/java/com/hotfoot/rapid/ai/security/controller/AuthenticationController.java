@@ -30,7 +30,7 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping(value="/rest/create/token")
-	private boolean createToken(@RequestBody AuthenticationRequest authenticationRequest,@RequestHeader("token") String secretKey,
+	private AuthenticationRequest createToken(@RequestBody AuthenticationRequest authenticationRequest,@RequestHeader("token") String secretKey,
 			HttpServletResponse response) {
 		return tokenCreator.createToken(authenticationRequest,response);
 	}
