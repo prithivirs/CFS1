@@ -3,6 +3,7 @@ package com.hotfoot.rapid.ai.security.controller;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class AuthenticationController {
 		return secretTokenProvider.generateSecretKey(client);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping(value="/rest/create/token")
 	private AuthenticationRequest createToken(@RequestBody AuthenticationRequest authenticationRequest,
 			HttpServletResponse response) {
