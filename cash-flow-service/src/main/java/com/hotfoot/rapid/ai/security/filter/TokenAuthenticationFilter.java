@@ -3,6 +3,7 @@ package com.hotfoot.rapid.ai.security.filter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -36,6 +37,9 @@ public class TokenAuthenticationFilter implements Filter {
 	
 	@Value("#{'${whitelisted.domains:localhost}'.split(',')}")
 	private String[] whiteListedDomains;
+	
+	@Value("#{'${whitelisted.path:/rest/create/token}'.split(',')}")
+	private String[] excludedPath;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -47,6 +51,16 @@ public class TokenAuthenticationFilter implements Filter {
 			throws IOException, ServletException {
 		try {
 			String referrer = ((HttpServletRequest) request).getHeader(HttpHeaders.REFERER);
+			String contextPath = ((HttpServletRequest) request).getContextPath();
+			String path = ((HttpServletRequest) request).getRequestURI().substring(contextPath.length());
+			boolean isExcludedPath = true;
+			for (String epath : excludedPath) {
+				if (!epath.equalsIgnoreCase(path)) {
+					isExcludedPath = false;
+					continue;
+				}
+			}
+			
 			boolean isValidReferrer = true;
 			for (String domainName : whiteListedDomains) {
 				if (!referrer.startsWith(domainName.trim())) {
@@ -55,7 +69,7 @@ public class TokenAuthenticationFilter implements Filter {
 				}
 			}
 			String tokenFromRequest = tokenService.getToken((HttpServletRequest) request);
-			if (tokenFromRequest == null || referrer == null || !isValidReferrer) {
+			if (tokenFromRequest == null || referrer == null || !isValidReferrer || !isExcludedPath) {
 				logoutService.logout((HttpServletRequest) request, (HttpServletResponse) response);
 			} else {
 				TokenCache activeToken = tokenCacheRepo.findByToken(tokenFromRequest);
@@ -63,12 +77,13 @@ public class TokenAuthenticationFilter implements Filter {
 					activeToken.setModifiedDate(new Date());
 					tokenCacheRepo.save(activeToken);
 				}
+				chain.doFilter(request, response);
 			}
 			// Call the next filter in the chain (or the servlet if this is the last filter)
 		} catch (Exception e) {
 			System.out.println("unable to update token's validity");
+			e.printStackTrace();
 		}
-		chain.doFilter(request, response);
 	}
 
 	@Override
