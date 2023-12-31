@@ -15,5 +15,7 @@
 	<name>CFS</name>
 	<modules>
 		<module>cash-flow-service</module>
-	</modules>
+		<module>cfs-integration</module>
+<!-- 		<module>perfios</module>
+ -->	</modules>
 </project>

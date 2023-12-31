@@ -35,3 +35,33 @@ services.status:
 document.upload_file_path: /home/vagrant/images
 document.local_upload_file_path: /home/vagrant/images
 document.permitted_content_types: application/pdf
+
+perfios.impl.version: 1
+perfios.callBackUrl: abc
+perfios.vendor: pfc
+perfios.returnUrl: abc
+perfios.integration.userName: abc
+perfios.integration.key: abc
+perfios.retry.count: 5
+perfios.product.name: abc
+perfios.integration.url: abc
+perfios.simulator: abc
+perfios.private-key-path: abc
+perfios.productType: lll
+perfios.bsa.upload.callBackUrl: abs
+
+perfios.bsa.product.map:
+   cartenabled: yes
+   v: a
+
+req.prefix: HFT
+esb.url: https://osbuat.aubankuat.in/
+
+au.username: au
+au.password: pass
+au.key: abcd1234efg
+
+
+au.common.url: as
+
+cloud.bucketFolder:

@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.hotfoot.rapid.ai.document.UploadFile;
 import com.hotfoot.rapid.ai.document.service.ConfigService;
@@ -53,4 +54,9 @@ public class CFSBootService {
 //			@Value("${proofdocuments.local_upload_file_path}") String localPath, @Value("${aws.upload}") boolean aws) {
 //		return new ServletRegistrationBean(new ShowFile(rootPath, localPath, aws), "/showfile");
 //	}
+	
+	@Bean
+	public RestTemplate restTemplate() {
+	    return new RestTemplate();
+	}
 }
