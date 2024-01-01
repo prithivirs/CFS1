@@ -35,6 +35,12 @@ public class BsaIntgerationDetails implements Serializable{
 	@Column(name="request_id")
 	private String requestId;
 	
+	@Column(name="loan_id")
+	private String loanId;
+	
+	@Column(name="customer_reference_no")
+	private String customerReferenceNo;
+	
 	@Column(name="operation")
 	private String operation;
 	

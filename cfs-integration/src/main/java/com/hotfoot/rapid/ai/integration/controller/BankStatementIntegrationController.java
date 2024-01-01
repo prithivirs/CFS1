@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hotfoot.rapid.ai.integration.datamodel.BankStatementDetails;
 import com.hotfoot.rapid.ai.integration.model.CartResponse;
 import com.hotfoot.rapid.ai.integration.model.CartUploadRequest;
+import com.hotfoot.rapid.ai.integration.repository.BankStatementDetailsRepository;
 import com.hotfoot.rapid.ai.integration.service.BankStatementIntegrationService;
 
 @RestController
@@ -25,6 +26,10 @@ public class BankStatementIntegrationController {
 
 	@Autowired
 	private BankStatementIntegrationService bankStatementIntegrationService;
+	
+	@Autowired
+	private BankStatementDetailsRepository bankStatementDetailsRepository;
+
 
 	public static final Logger logger = LoggerFactory.getLogger(BankStatementIntegrationController.class);
 
@@ -57,14 +62,15 @@ public class BankStatementIntegrationController {
 
 	// bank statement report
 	@RequestMapping(value = "/rest/cart/statement_report", method = RequestMethod.GET)
-	public ResponseEntity<?> getBankStatementReport(HttpServletRequest httpRequest, @RequestParam("application_ref_no") String applicationRefNo,
-			@RequestParam("document_id") String documentId, @RequestParam("request_id") String requestId) {
-		logger.info("bank statement response for application id {} and documentId {} and requestId {} ", applicationRefNo, documentId, requestId);
-		List<BankStatementDetails> bankStatements = bankStatementIntegrationService.getBankStatementReport(applicationRefNo, documentId, requestId);
+	public ResponseEntity<?> getBankStatementReport(HttpServletRequest httpRequest, @RequestParam("loan_id") String loan_id,
+			@RequestParam("document_id") String documentId,@RequestParam("customer_reference_no") String customerRefNo, @RequestParam("request_id") String requestId) {
+		logger.info("bank statement response for loan id {} and documentId {} and requestId {} ", loan_id, documentId, requestId);
+		List<BankStatementDetails> bankStatements = bankStatementIntegrationService.getBankStatementReport(loan_id,customerRefNo, documentId, requestId);
 		logger.info("bank statement response {}", bankStatements);
 		if (bankStatements.isEmpty()) {
 			return ResponseEntity.ok("Processing Request");
 		}
+		bankStatementDetailsRepository.saveAll(bankStatements);
 		return ResponseEntity.ok(bankStatements);
 
 	}

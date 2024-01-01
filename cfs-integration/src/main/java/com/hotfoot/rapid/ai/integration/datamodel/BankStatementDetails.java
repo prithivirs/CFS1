@@ -1,5 +1,6 @@
 package com.hotfoot.rapid.ai.integration.datamodel;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,14 +30,22 @@ public class BankStatementDetails {
 	@Column(name = "unique_id")
 	@JsonProperty("unique_id")
 	private String uniqueId;
-
-	@Column(name = "application_reference_no")
-	@JsonProperty("application_reference_no")
-	private String applicationReferenceNo;
-
+	
+	@Column(name= "date")
+	@JsonProperty("date")
+    private Date date= new Date();
+	
+	@Column(name = "loan_id")
+	@JsonProperty("loan_id")
+	private String loanId;
+	
 	@Column(name = "customer_reference_no")
 	@JsonProperty("customer_reference_no")
 	private String customerReferenceNo;
+	
+	@Column(name = "document_id")
+	@JsonProperty("document_id")
+	private String documentId;
 
 	@Column(name = "customer_role")
 	@JsonProperty("customer_role")

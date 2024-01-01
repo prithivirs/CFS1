@@ -64,13 +64,15 @@ public class BankStatementIntegrationService {
 	public static final Logger logger=LoggerFactory.getLogger(BankStatementIntegrationService.class);
 	
 	
-	public String uploadBankStatementService(String applicationRefNo, String customerRefNo, MultipartFile bankStatement, String productName) {
-		String requestId = prefix + System.currentTimeMillis() + applicationRefNo;
+	public String uploadBankStatementService(String loanId, String customerRefNo, MultipartFile bankStatement, String productName) {
+		String requestId = prefix + System.currentTimeMillis() + loanId;
 		BsaIntgerationDetails bsaIntegrationRequest = new BsaIntgerationDetails();
 		bsaIntegrationRequest.setOperation("UPLOAD");
+		bsaIntegrationRequest.setCustomerReferenceNo(customerRefNo);
+		bsaIntegrationRequest.setLoanId(loanId);
 		bsaIntegrationRequest.setRequestId(requestId);
 		bsaIntegrationRequest.setProductName(productName);
-		String requestContent = createFileUploadRequestToEsb(requestId, applicationRefNo, bankStatement);
+		String requestContent = createFileUploadRequestToEsb(requestId, bankStatement);
 		bsaIntegrationRequest.setRequest(requestContent);
 		bsaIntegrationDetailsRepository.save(bsaIntegrationRequest);
 		integrationTrack.saveRequest( productName, "BSA_UPLOAD", requestId);
@@ -79,7 +81,7 @@ public class BankStatementIntegrationService {
 		return requestId;
 	}
 	
-	private String createFileUploadRequestToEsb(String requestId, String applicationRefNo, MultipartFile bsaStatementFile) {
+	private String createFileUploadRequestToEsb(String requestId, MultipartFile bsaStatementFile) {
 		logger.info("creating request for uploading bank statement");
 		String jsonRequest = "";
 		try {
@@ -104,7 +106,7 @@ public class BankStatementIntegrationService {
 
 
 	
-	public List<BankStatementDetails> getBankStatementReport(String applicationId, String documentId, String requestId) {
+	public List<BankStatementDetails> getBankStatementReport(String loanId,String customerRefNo, String documentId, String requestId) {
 		List<BsaIntgerationDetails> bsaIntgerationDetails = bsaIntegrationDetailsRepository.findByDocumentIdAndRequestId(documentId, requestId);
 		logger.info("cart request size" + bsaIntgerationDetails.size());
 		integrationTrack.saveRequest("CFS", "BSA_REPORT", requestId);
@@ -128,7 +130,10 @@ public class BankStatementIntegrationService {
 						if (statementResponse.getStatus().equalsIgnoreCase("Processed")) {
 							List<BankDataDetails> bankData = statementResponse.getData();
 							if (!bankData.isEmpty()) {
-								for (BankDataDetails datum : bankData) {
+								for (BankDataDetails datum : bankData) {									
+									bankStatement.setLoanId(loanId);
+									bankStatement.setCustomerReferenceNo(customerRefNo);
+									bankStatement.setDocumentId(documentId);
 									bankStatement.setAccountHolderName(datum.getAccountName());
 									bankStatement.setAcNumber(datum.getAccountNumber());
 									bankStatement.setAcType(datum.getAccountType());
