@@ -1,6 +1,5 @@
 package com.hotfoot.rapid.ai.integration.datamodel;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;

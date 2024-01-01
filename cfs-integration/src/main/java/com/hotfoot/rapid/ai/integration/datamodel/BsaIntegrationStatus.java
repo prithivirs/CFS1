@@ -1,6 +1,5 @@
 package com.hotfoot.rapid.ai.integration.datamodel;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -39,5 +38,8 @@ public class BsaIntegrationStatus {
 	
 	@Column(name="product_name")
 	private String productName;
+	
+	@Column(name="customer_id")
+	private String customerId;
 
 }

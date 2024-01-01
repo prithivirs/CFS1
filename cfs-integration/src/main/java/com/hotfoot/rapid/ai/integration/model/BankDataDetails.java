@@ -1,6 +1,10 @@
 package com.hotfoot.rapid.ai.integration.model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -109,5 +113,22 @@ public class BankDataDetails {
 	
 	@JsonProperty("bsaCreditData")
 	private BsaCreditData bsaCreditData;
+	
+	public int getNumberOfBankStatementsForYear(int offset) {
+		List<String> monthsInCurrentYear = new ArrayList<>();
+		List<AnalysisDatum> analysisData2 = this.getAnalysisData();
+		if(analysisData2 != null && !analysisData2.isEmpty()) {
+			Set<String> monthsList = analysisData2.stream().filter(ad -> !ad.getMonth().equalsIgnoreCase("Grand Total")).map(ad -> ad.getMonth()).collect(Collectors.toSet());
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR) - offset;
+			// Filter the list to include only months from the current year
+			for (String month : monthsList) {
+				int year = Integer.parseInt(month.split("-")[1]);
+				if (year == currentYear) {
+					monthsInCurrentYear.add(month);
+				}
+			}
+		}
+    	return monthsInCurrentYear.size();
+    }
 }
 

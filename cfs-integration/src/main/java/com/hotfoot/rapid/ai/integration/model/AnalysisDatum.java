@@ -137,5 +137,12 @@ public class AnalysisDatum {
     
     @JsonProperty("cashDepositPercentage")
     private double cashDepositPercentage;
+    
+    @JsonProperty("totalInterestReceived")
+    private double totalInterestReceived;
+    
+    @JsonProperty("totalInterestPaid")
+    private double totalInterestPaid;
+    
 }
 
