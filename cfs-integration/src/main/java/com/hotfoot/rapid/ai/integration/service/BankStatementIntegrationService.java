@@ -59,6 +59,9 @@ public class BankStatementIntegrationService {
 	@Value("${req.prefix}")
 	private String prefix;
 	
+	@Value("${cart.stub}")
+	private boolean cartStubEnabled;
+	
 	
 	
 	public static final Logger logger=LoggerFactory.getLogger(BankStatementIntegrationService.class);
@@ -120,6 +123,9 @@ public class BankStatementIntegrationService {
 			if (maxCartObj != null) {
 				try {
 					BsaIntegrationStatus cartStatus = bsaIntegrationStatusRepository.findByDocumentId(maxCartObj.getDocumentId());
+					if (cartStatus == null && cartStubEnabled) {
+						cartStatus = bsaIntegrationStatusRepository.findByDocumentId("DOC07811816");
+					}
 					logger.info("cart status for bank statement" + cartStatus);
 					if (cartStatus != null && cartStatus.getStatus().equalsIgnoreCase("true")) {
 						BankStatementDetails bankStatement = new BankStatementDetails();
