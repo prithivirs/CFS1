@@ -14,7 +14,7 @@ public interface BsaIntegrationDetailsRepository extends JpaRepository<BsaIntger
 
 	BsaIntgerationDetails findByDocumentId(String documentId);
 	
-	List<BsaIntgerationDetails> findByLRequestIdAndDocumentId(String requestId, String documentId);
+	List<BsaIntgerationDetails> findByRequestIdAndDocumentId(String requestId, String documentId);
 	 
 	BsaIntgerationDetails findByLoanIdAndCustomerReferenceNoAndRequestId(String loanId, String customerRef, String requestId);
 	
