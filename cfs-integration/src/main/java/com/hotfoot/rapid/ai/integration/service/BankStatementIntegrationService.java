@@ -122,7 +122,7 @@ public class BankStatementIntegrationService {
 			logger.info("Cart Request-->" + maxCartObj);
 			if (maxCartObj != null) {
 				try {
-					BsaIntegrationStatus cartStatus = bsaIntegrationStatusRepository.findByDocumentId(maxCartObj.getDocumentId());
+					BsaIntegrationStatus cartStatus = bsaIntegrationStatusRepository.findByRequestIdAndCustomerId(requestId,customerRefNo);
 					if (cartStatus == null && cartStubEnabled) {
 						cartStatus = bsaIntegrationStatusRepository.findByDocumentId("DOC07811816");
 					}
@@ -275,7 +275,8 @@ public class BankStatementIntegrationService {
 	public ResponseEntity<?> uploadStatus(CartUploadRequest cartUploadRequest, String productName) {
 		logger.info("cart status from ESB for document id" + cartUploadRequest.getDocumentId());
 		integrationTrack.saveRequest(productName, "BSA_STATUS", cartUploadRequest.getRequestid());
-		BsaIntgerationDetails cartRequest = bsaIntegrationDetailsRepository.findByDocumentId(cartUploadRequest.getDocumentId());
+		BsaIntgerationDetails cartRequest = bsaIntegrationDetailsRepository.findByLoanIdAndCustomerReferenceNoAndRequestId(cartUploadRequest.getLoanId(),
+				cartUploadRequest.getCustomerRef(), cartUploadRequest.getRequestid());
 		if (cartRequest == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Document id not found...");
 		} else {

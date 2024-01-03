@@ -9,5 +9,7 @@ public interface BsaIntegrationStatusRepository extends JpaRepository<BsaIntegra
 	BsaIntegrationStatus findByDocumentId(String documentId);
 	
 	BsaIntegrationStatus findByDocumentIdAndStatus(String documentId, String Status);
+	
+	BsaIntegrationStatus findByRequestIdAndCustomerId(String requestId, String customerId);
 
 }
