@@ -110,7 +110,7 @@ public class BankStatementIntegrationService {
 
 	
 	public List<BankStatementDetails> getBankStatementReport(String loanId,String customerRefNo, String documentId, String requestId) {
-		List<BsaIntgerationDetails> bsaIntgerationDetails = bsaIntegrationDetailsRepository.findByDocumentIdAndRequestId(documentId, requestId);
+		List<BsaIntgerationDetails> bsaIntgerationDetails = bsaIntegrationDetailsRepository.findByRequestIdAndDocumentId(requestId, documentId);
 		logger.info("cart request size" + bsaIntgerationDetails.size());
 		integrationTrack.saveRequest("CFS", "BSA_REPORT", requestId);
 		ObjectMapper mapper = new ObjectMapper();
