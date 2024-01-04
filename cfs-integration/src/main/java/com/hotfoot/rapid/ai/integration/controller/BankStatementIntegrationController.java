@@ -35,10 +35,10 @@ public class BankStatementIntegrationController {
 
 	// upload bank statement
 	@RequestMapping(value = "/rest/cart/upload", method = RequestMethod.POST)
-	public String uploadBankStatementService(HttpServletRequest httpRequest, @RequestParam("application_ref_no") String applicationRefNo,
+	public String uploadBankStatementService(HttpServletRequest httpRequest, @RequestParam("loan_id") String loanId,
 			@RequestParam("customer_ref_no") String customerRefNo, @RequestParam("file") MultipartFile bankStatement) {
-		logger.info("uploading bank statement for application id {} and customer reference number {}", applicationRefNo, customerRefNo);
-		return bankStatementIntegrationService.uploadBankStatementService(applicationRefNo, customerRefNo, bankStatement,"");
+		logger.info("uploading bank statement for application id {} and customer reference number {}", loanId, customerRefNo);
+		return bankStatementIntegrationService.uploadBankStatementService(loanId, customerRefNo, bankStatement,"");
 	}
 
 	// get upload bank statement response based on requestId
