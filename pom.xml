@@ -14,8 +14,8 @@
 	<packaging>pom</packaging>
 	<name>CFS</name>
 	<modules>
-		<module>cash-flow-service</module>
-		<!--		<module>cfs-integration</module>-->
+		<!--<module>cash-flow-service</module>-->
+				<module>cfs-integration</module>
 <!-- 		<module>perfios</module>
  -->	</modules>
 </project>
